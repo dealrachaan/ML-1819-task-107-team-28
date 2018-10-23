@@ -1,2 +1,5 @@
 available at https://www.kaggle.com/crowdflower/twitter-user-gender-classification
 https://toolbox.google.com/datasetsearch/search?query=tweets%20from%20women&docid=2WbNrfYmluWy8JabAAAAAA%3D%3D
+
+Dataset genders users as 'male', 'female', 'brand' or 'unknown' with confidence interval (0,1). 
+Only using data with gender 'male' or 'female' with confidence of 1 to train program (~10,000 out of ~20,000 entries)
