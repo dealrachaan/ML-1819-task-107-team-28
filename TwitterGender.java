@@ -1,3 +1,5 @@
+//TODO: set aside %10 of dataset tweets to tests data, write function to make program evaluate gender of twitter users based on assembled wordlists
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -6,7 +8,7 @@ public class TwitterGender {
 
 master
 	public static void main(String[] args) throws FileNotFoundException {
-		Scanner s = new Scanner(new File("/home/doom/Desktop/Ethan/MachineLearningThing/Data.csv"));
+		Scanner s = new Scanner(new File("Data.csv"));
 		s.useDelimiter(",");
 		
 		ArrayList<String> genders = new ArrayList<String>();
@@ -35,35 +37,6 @@ master
 =======
 //String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
 String[] common = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
-
-//female data: 2D ArrayList of entry objects
-//for each word: if not in common, increment Entry count of word or make new Entry
-String[] entry = new String[2]; 
-
-ArrayList<String[]> fList = new ArrayList<String[]>();
-
-//get word
-if (common.contains(word) == FALSE){
-    if(contained(word) != NULL){
-        i = contained(word);
-        fList[i][0] = fList[i][0] +1;
-    }
-    else{
-        fList.add(new String[] {"1", word});
-    }
-}
-        
-//check if fList contains word
-public static int contained (word){
-    size = fList.size();
-        for (int i=0; i<size; i++){
-            if fList[i][1] == word{
-                return i;
-            }
-        }
-    return NULL;
-}
-master
 
 		for(int j = 0; j<tweets.size(); j++){
 
@@ -102,5 +75,5 @@ master
 		System.out.println(exclusivelyMaleWords.size() + " words used only by men");
 		
 	}
-
+//
 }
