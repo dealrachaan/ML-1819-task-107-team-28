@@ -1,3 +1,5 @@
+//TODO: set aside %10 of dataset tweets to tests data, write function to make program evaluate gender of twitter users based on assembled wordlists
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
