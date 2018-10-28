@@ -1,4 +1,4 @@
-//TODO: set aside %10 of dataset tweets to tests data, write function to make program evaluate gender of twitter users based on assembled wordlists
+//TODO: write function to make program evaluate gender of twitter users based on assembled wordlists
 
 import java.io.*;
 import java.util.Scanner;
@@ -57,14 +57,14 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 
 		for (String w :femaleTweetWords) {
 
-			if(!maleTweetWords.contains(w))
+			if(!maleTweetWords.contains(w) && !common.contains(w))
 				exclusivelyFemaleWords.add(w);
 			
 		}
 
 		for (String w :maleTweetWords) {
 
-			if(!femaleTweetWords.contains(w))
+			if(!femaleTweetWords.contains(w) && !common.contains(w))
 				exclusivelyMaleWords.add(w);
 			
 		}
@@ -75,5 +75,9 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 		System.out.println(exclusivelyMaleWords.size() + " words used only by men");
 		
 	}
+	//read tweet and assess gender
+	//assume female unless contains male word
+	Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/TestData.csv"));
+
 //
 }
