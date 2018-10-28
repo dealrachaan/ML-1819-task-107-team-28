@@ -1,4 +1,4 @@
-//TODO: set aside %10 of dataset tweets to tests data, write function to make program evaluate gender of twitter users based on assembled wordlists
+
 
 import java.io.*;
 import java.util.Scanner;
@@ -6,9 +6,20 @@ import java.util.ArrayList;
 
 public class TwitterGender {
 
-master
+//master
 	public static void main(String[] args) throws FileNotFoundException {
-		Scanner s = new Scanner(new File("Data.csv"));
+		//String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
+		String[] commonWords = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+
+		ArrayList<String> common = new ArrayList<String>();
+
+		for (String w : commonWords) {
+
+			common.add(w); 
+			
+		}
+
+		Scanner s = new Scanner(new File("TrainingData.csv"));
 		s.useDelimiter(",");
 		
 		ArrayList<String> genders = new ArrayList<String>();
@@ -33,10 +44,7 @@ master
 				
             i++;
         }
-		s.close();
-=======
-//String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
-String[] common = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+		s.reset();
 
 		for(int j = 0; j<tweets.size(); j++){
 
@@ -44,7 +52,8 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 
 			for (String x : tweet) {
 				
-				if(j<5368) //5368 is the last female entry in the dataset
+				//if(genders.get(j)=="female") 
+				if(j<4500)
 					femaleTweetWords.add(x);
 				else
 					maleTweetWords.add(x);
@@ -57,14 +66,14 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 
 		for (String w :femaleTweetWords) {
 
-			if(!maleTweetWords.contains(w))
+			if(!maleTweetWords.contains(w) && !common.contains(w))
 				exclusivelyFemaleWords.add(w);
 			
 		}
 
 		for (String w :maleTweetWords) {
 
-			if(!femaleTweetWords.contains(w))
+			if(!femaleTweetWords.contains(w) && !common.contains(w))
 				exclusivelyMaleWords.add(w);
 			
 		}
@@ -74,6 +83,52 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 		System.out.println(exclusivelyFemaleWords.size() + " words used only by women");
 		System.out.println(exclusivelyMaleWords.size() + " words used only by men");
 		
-	}
+	
+	//read tweet and assess gender
+	//assume male unless contains female word
+	
+	Scanner s1 = new Scanner(new File("TestData.csv"));
+	s1.useDelimiter(",");
+	String trueGender = "";
+	String guessGender = "";
+	String tweet = "";
+	ArrayList<String> tweetWords = new ArrayList<String>();
+	int tweetCount = 0; //item [1] and every second item thereafter in test data is Tweet text
+	int correct = 0;
+	
+	
+	while(s1.hasNext()){ 
+		
+		tweetCount++;
+		tweetWords.clear();
+		guessGender = "";
+		trueGender = s1.next();
+		if(s1.hasNext())
+			tweet = s1.next();
+		else
+			break;
+		String[] splitTweet = tweet.split(" ");
+		for (String x : splitTweet){
+			tweetWords.add(x);
+		}
+		for (i=0; i<tweetWords.size(); i++){
+			if(exclusivelyFemaleWords.contains(tweetWords.get(i))){
+				guessGender = "female";
+			}
+		}
+		if(guessGender!="female"){
+			guessGender = "male";
+		}
+		if (guessGender == trueGender){
+			correct++;
+		}
+		
+        	}
+	double accuracy = correct/tweetCount;
+	System.out.println(accuracy +"% accuracy.");
+
+	s.close();
+	s1.close();
 //
+	}
 }
