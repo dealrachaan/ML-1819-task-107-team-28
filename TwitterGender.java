@@ -8,6 +8,9 @@ public class TwitterGender {
 
 master
 	public static void main(String[] args) throws FileNotFoundException {
+		//String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
+		String[] common = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+
 		Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/TrainingData.csv"));
 		s.useDelimiter(",");
 		
@@ -33,10 +36,7 @@ master
 				
             i++;
         }
-		s.close();
-=======
-//String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
-String[] common = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
+		s.reset();
 
 		for(int j = 0; j<tweets.size(); j++){
 
@@ -76,8 +76,42 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 		
 	}
 	//read tweet and assess gender
-	//assume female unless contains male word
+	//assume male unless contains female word
+	
 	Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/TestData.csv"));
+	s.useDelimiter(",");
+	String trueGender = "";
+	String guessGender = "";
+	String tweet = "";
+	ArrayList<String> tweetWords = new ArrayList<String>();
+	int tweetCount = 0; //item [1] and every second item thereafter in test data is Tweet text
+	int correct = 0;
+	boolean f = false;
+	
+	while(s.hasNext()){
+		f = 0;
+		tweetCount++;
+		tweetWords.clear();
+		guessGender = "";
+		String trueGender = s.next();
+		String tweet = s.next();
+		for (String x : tweet){
+			tweetWords.add(x);
+		}
+		for (i=0; i<tweetWords.length(); i++){
+			if(exclusivelyFemaleWords.contains(tweetWords[i]){
+				guessGender = "female"
+			}
+		}
+		if(guessGender!="female"){
+			guessGender = "male";
+		}
+		if (guessGender == trueGender){
+			correct++;
+		}
 
+        }
+	double accuracy = correct/tweetCount;
+	print(double+"% accuracy.");
 //
 }
