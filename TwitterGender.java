@@ -8,7 +8,7 @@ public class TwitterGender {
 
 master
 	public static void main(String[] args) throws FileNotFoundException {
-		Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/Data.csv"));
+		Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/TrainingData.csv"));
 		s.useDelimiter(",");
 		
 		ArrayList<String> genders = new ArrayList<String>();
