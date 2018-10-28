@@ -44,7 +44,7 @@ String[] common = {"the","of","and","a","to","in","is","you","that","it","he","w
 
 			for (String x : tweet) {
 				
-				if(j<5368) //5368 is the last female entry in the dataset
+				if(genders[j]=="female")
 					femaleTweetWords.add(x);
 				else
 					maleTweetWords.add(x);
