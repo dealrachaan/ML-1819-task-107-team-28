@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,6 +7,7 @@ public class TwitterGender {
 //master
 	public static void main(String[] args) throws FileNotFoundException {
 		//String of 100 most common words in English from https://gist.github.com/gravitymonkey/2406023
+
 		String[] commonWords = {"the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","I","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get","come","made","may","part"};
 
 		ArrayList<String> common = new ArrayList<String>();
@@ -20,6 +19,7 @@ public class TwitterGender {
 		}
 
 		Scanner s = new Scanner(new File("TrainingData.csv"));
+
 		s.useDelimiter(",");
 		
 		ArrayList<String> genders = new ArrayList<String>();
@@ -52,7 +52,7 @@ public class TwitterGender {
 
 			for (String x : tweet) {
 				
-				//if(genders.get(j)=="female") 
+
 				if(j<4500)
 					femaleTweetWords.add(x);
 				else
@@ -83,8 +83,7 @@ public class TwitterGender {
 		System.out.println(exclusivelyFemaleWords.size() + " words used only by women");
 		System.out.println(exclusivelyMaleWords.size() + " words used only by men");
 		
-	
-	//read tweet and assess gender
+//read tweet and assess gender
 	//assume male unless contains female word
 	
 	Scanner s1 = new Scanner(new File("TestData.csv"));
@@ -140,4 +139,5 @@ public class TwitterGender {
 	s1.close();
 //
 	}
+
 }
