@@ -89,42 +89,51 @@ public class TwitterGender {
 	
 	Scanner s1 = new Scanner(new File("TestData.csv"));
 	s1.useDelimiter(",");
-	String trueGender = "";
-	String guessGender = "";
+	int trueGender = -1;
+	int guessGender = -1;
 	String tweet = "";
 	ArrayList<String> tweetWords = new ArrayList<String>();
-	int tweetCount = 0; //item [1] and every second item thereafter in test data is Tweet text
-	int correct = 0;
+	double tweetCount = 0; //item [1] and every second item thereafter in test data is Tweet text
+	double correct = 0;
 	
-	
+	int k =1;
 	while(s1.hasNext()){ 
 		
 		tweetCount++;
 		tweetWords.clear();
-		guessGender = "";
-		trueGender = s1.next();
-		if(s1.hasNext())
-			tweet = s1.next();
+		
+		if(k<500)
+			trueGender = 1;
 		else
-			break;
+			trueGender = 0;
+		
+		
+		tweet = s1.next();
+		
 		String[] splitTweet = tweet.split(" ");
 		for (String x : splitTweet){
 			tweetWords.add(x);
 		}
 		for (i=0; i<tweetWords.size(); i++){
 			if(exclusivelyFemaleWords.contains(tweetWords.get(i))){
-				guessGender = "female";
+				guessGender = 1;
 			}
 		}
-		if(guessGender!="female"){
-			guessGender = "male";
-		}
-		if (guessGender == trueGender){
-			correct++;
+		if(guessGender!=1){
+			guessGender = 0;
 		}
 		
-        	}
-	double accuracy = correct/tweetCount;
+		if (guessGender==trueGender){
+			correct++;
+			//System.out.println(correct);
+		}
+		//System.out.println("guessed: " + guessGender);
+		//System.out.println("actual: " + trueGender);
+		
+		k++;
+			}
+			
+	double accuracy = (100/tweetCount)*correct;
 	System.out.println(accuracy +"% accuracy.");
 
 	s.close();
