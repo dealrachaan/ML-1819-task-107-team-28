@@ -80,8 +80,10 @@ master
 	
 	Scanner s = new Scanner(new File("https://api.github.com/repos/dealrachaan/ML-1819-task-107-team-28/git/blobs/master/TestData.csv"));
 	s.useDelimiter(",");
-	String trueGender = "";
-	String guessGender = "";
+	String g = "";
+	int trueGender = -1;
+	int guessGender = -1;
+	//female = 0, male = 1
 	String tweet = "";
 	ArrayList<String> tweetWords = new ArrayList<String>();
 	int tweetCount = 0; //item [1] and every second item thereafter in test data is Tweet text
@@ -93,21 +95,30 @@ master
 		tweetCount++;
 		tweetWords.clear();
 		guessGender = "";
-		String trueGender = s.next();
-		String tweet = s.next();
-		for (String x : tweet){
-			tweetWords.add(x);
+		while(s.hasNext() && !s.next().equals("male" || "female"){
+			g = s.next();
 		}
-		for (i=0; i<tweetWords.length(); i++){
-			if(exclusivelyFemaleWords.contains(tweetWords[i]){
-				guessGender = "female"
+		if(g.equals("female"){
+			trueGender = 0; //female
+		}else{
+			trueGender == 1; //male
+		}
+		if(s.hasNext()){
+			tweet = s.next();
+			for (String x : tweet){
+				tweetWords.add(x);
 			}
-		}
-		if(guessGender!="female"){
-			guessGender = "male";
-		}
-		if (guessGender == trueGender){
-			correct++;
+			for (i=0; i<tweetWords.length(); i++){
+				if(exclusivelyFemaleWords.contains(tweetWords.get(i)){
+					guessGender = "female"
+				}
+			}
+			if(guessGender!="female"){
+				guessGender = "male";
+			}
+			if (guessGender == trueGender){
+				correct++;
+			}
 		}
 
         }
