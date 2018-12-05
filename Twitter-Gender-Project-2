@@ -1,0 +1,6 @@
+//TODO:
+//load .arff file into Weka
+//run ZeroR algorithm
+//run trees.UserClassifier algorithm
+//run other algorithms
+//return best one
